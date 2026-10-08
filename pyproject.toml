@@ -1,0 +1,36 @@
+# One uv project for the whole course. `uv sync` (lesson 0) creates `.venv/` with the tools
+# below, and `uv run ...` from ANY lesson folder uses them.
+
+[project]
+name = "learnpython"
+version = "0.1.0"
+description = "A hands-on Python course, one lesson per folder"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.uv]
+package = false # this is a folder of lessons, not an installable package
+
+[tool.pytest.ini_options]
+# Each lesson keeps its tests at the bottom of exercises.py, so collect that file too.
+python_files = ["exercises.py", "test_*.py"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# F = real bugs, E/W = style, I = import order, B = common gotchas, UP = modern syntax,
+# SIM = simpler ways to write things
+select = ["F", "E", "W", "I", "B", "UP", "SIM"]
+
+[tool.basedpyright]
+# Editor type checker (lesson 0, step 4). "standard" is helpful without being overwhelming.
+typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"
